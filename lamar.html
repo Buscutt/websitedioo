@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Lamaran - JobFind</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .apply-card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .apply-card h2 {
+            margin-top: 0;
+            color: #3498db;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="file"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #27ae60;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 600px) {
+            .apply-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="apply-card">
+        <h2>Formulir Lamaran Pekerjaan</h2>
+        <form id="applyForm">
+            <div class="form-group">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Nomor Telepon</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="cv">Unggah CV (PDF)</label>
+                <input type="file" id="cv" name="cv" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+                <label for="cover_letter">Surat Lamaran</label>
+                <textarea id="cover_letter" name="cover_letter"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Kirim Lamaran</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript sederhana untuk simulasi
+        const form = document.getElementById('applyForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const cv = document.getElementById('cv').files;
+
+            if (name && email && cv.length > 0) {
+                alert('Simulasi: Lamaran Anda berhasil dikirim! Silakan tunggu kabar dari kami.');
+                // Di sini nanti ada kode untuk mengirim data dan file ke server
+            } else {
+                alert('Mohon isi nama, email, dan unggah CV Anda.');
+            }
+        });
+    </script>
+
+</body>
+</html>

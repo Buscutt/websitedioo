@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Lowongan Kerja - JobFind</title>
+    <style>
+        /* CSS untuk styling keseluruhan halaman */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .header nav a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .header nav a:hover {
+            color: #3498db;
+        }
+
+        .search-section {
+            background: #3498db;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .search-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .search-bar input, .search-bar button {
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .search-bar input {
+            flex: 1;
+        }
+        
+        .search-bar button {
+            background-color: #2ecc71;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #27ae60;
+        }
+
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .job-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-card h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+
+        .job-card .company {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .job-card .location {
+            color: #777;
+            font-style: italic;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-button:hover {
+            background-color: #2980b9;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* PERBAIKAN: Media Query untuk Layar Kecil (seperti HP) */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .header nav {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header nav a {
+                margin: 5px 0;
+            }
+
+            .search-section h1 {
+                font-size: 2em;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .search-bar input {
+                width: 100%;
+                min-width: unset;
+                margin-bottom: 10px;
+            }
+            
+            .search-bar button {
+                width: 100%;
+            }
+
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+    <div class="logo">JobFind</div>
+    <nav>
+        <a href="job_search_full.html">Cari Lowongan</a>
+        <a href="perusahaan.html">Perusahaan</a>
+        <a href="login.html">Masuk</a>
+        </nav>
+    </div>
+
+    <div class="search-section">
+        <h1>Temukan Pekerjaan Impian Anda</h1>
+        <p>Jelajahi ribuan lowongan kerja dari perusahaan terkemuka.</p>
+        <div class="search-bar">
+            <input type="text" id="job-title-input" placeholder="Posisi, kata kunci, atau perusahaan">
+            <input type="text" id="location-input" placeholder="Lokasi">
+            <button id="search-button">Cari</button>
+        </div>
+    </div>
+
+    <div class="job-listings" id="job-listings-container">
+        </div>
+
+    <div class="footer">
+        <p>&copy; 2025 JobFind. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        // Data pekerjaan disimpan dalam array JavaScript
+        const allJobs = [
+            { id: 1, title: 'Web Developer', company: 'Tech Innovate Inc.', location: 'Jakarta, Indonesia', description: 'Bertanggung jawab untuk mengembangkan dan memelihara aplikasi web.' },
+            { id: 2, title: 'Marketing Manager', company: 'Growth Solutions', location: 'Bandung, Indonesia', description: 'Merancang dan mengimplementasikan strategi pemasaran digital.' },
+            { id: 3, title: 'Graphic Designer', company: 'Creative Minds Studio', location: 'Surabaya, Indonesia', description: 'Membuat desain visual untuk berbagai platform media.' },
+            { id: 4, title: 'Data Analyst', company: 'Data Insights Co.', location: 'Yogyakarta, Indonesia', description: 'Menganalisis data untuk mendukung keputusan bisnis.' },
+            { id: 5, title: 'UI/UX Designer', company: 'Creative Minds Studio', location: 'Jakarta, Indonesia', description: 'Merancang antarmuka pengguna yang intuitif.' },
+            { id: 6, title: 'Social Media Specialist', company: 'Growth Solutions', location: 'Jakarta, Indonesia', description: 'Mengelola dan membuat konten untuk media sosial.' }
+        ];
+
+        // Dapatkan elemen dari HTML
+        const jobTitleInput = document.getElementById('job-title-input');
+        const locationInput = document.getElementById('location-input');
+        const searchButton = document.getElementById('search-button');
+        const jobListingsContainer = document.getElementById('job-listings-container');
+
+        // Fungsi untuk menampilkan daftar pekerjaan
+        function displayJobs(jobs) {
+            jobListingsContainer.innerHTML = ''; // Hapus konten yang ada
+            if (jobs.length === 0) {
+                jobListingsContainer.innerHTML = '<p style="text-align:center; color:#555;">Tidak ada lowongan yang ditemukan.</p>';
+                return;
+            }
+
+            jobs.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job-card';
+                jobCard.innerHTML = `
+                    <h2>${job.title}</h2>
+                    <p class="company">${job.company}</p>
+                    <p class="location">${job.location}</p>
+                    <p>${job.description}</p>
+                    <a href="lamar.html" class="apply-button">Lamar Sekarang</a>
+                `;
+                jobListingsContainer.appendChild(jobCard);
+            });
+        }
+
+        // Fungsi untuk memfilter pekerjaan berdasarkan input
+        function filterJobs() {
+            const jobTitle = jobTitleInput.value.toLowerCase();
+            const location = locationInput.value.toLowerCase();
+
+            const filteredJobs = allJobs.filter(job => {
+                const titleMatch = job.title.toLowerCase().includes(jobTitle);
+                const locationMatch = job.location.toLowerCase().includes(location);
+                return titleMatch && locationMatch;
+            });
+            
+            displayJobs(filteredJobs);
+        }
+
+        // Jalankan fungsi saat tombol "Cari" diklik
+        searchButton.addEventListener('click', filterJobs);
+        
+        // Tampilkan semua pekerjaan saat halaman pertama kali dimuat
+        displayJobs(allJobs);
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Perusahaan - JobFind</title>
+    <style>
+        /* CSS untuk styling keseluruhan halaman */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .header nav a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .header nav a:hover {
+            color: #3498db;
+        }
+
+        .company-list-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .company-list-section h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .company-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .company-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .company-card h2 {
+            margin-top: 0;
+            color: #34495e;
+        }
+        
+        .company-card p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* Media Query untuk responsif */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+            .header nav {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .header nav a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+    <div class="logo">JobFind</div>
+    <nav>
+        <a href="job_search_full.html">Cari Lowongan</a>
+        <a href="perusahaan.html">Perusahaan</a>
+        <a href="login.html">Masuk</a>
+    </nav>
+</div>
+
+
+    <div class="company-list-section">
+        <h1>Daftar Perusahaan</h1>
+        <div class="company-container" id="company-container">
+            </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 JobFind. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        // Data perusahaan disimpan dalam array JavaScript
+        const allCompanies = [
+            { name: 'Tech Innovate Inc.', description: 'Perusahaan teknologi terkemuka yang fokus pada pengembangan aplikasi web dan mobile.', industry: 'Teknologi Informasi', jobs: 3 },
+            { name: 'Growth Solutions', description: 'Agen pemasaran digital yang membantu bisnis berkembang melalui strategi kreatif.', industry: 'Pemasaran & Iklan', jobs: 5 },
+            { name: 'Creative Minds Studio', description: 'Studio desain yang menciptakan identitas merek dan pengalaman visual yang unik.', industry: 'Desain Grafis', jobs: 2 },
+            { name: 'Data Insights Co.', description: 'Konsultan analitik data yang mengubah data menjadi wawasan bisnis yang berharga.', industry: 'Analisis Data', jobs: 4 },
+            { name: 'Astra Zeneca', description: 'Perusahaan farmasi global yang bergerak di bidang penelitian, pengembangan, dan penjualan obat-obatan.', industry: 'Farmasi', jobs: 10 },
+            { name: 'Bank Indonesia', description: 'Bank sentral Republik Indonesia yang mengatur kebijakan moneter dan stabilitas sistem keuangan.', industry: 'Perbankan', jobs: 8 }
+        ];
+
+        const companyContainer = document.getElementById('company-container');
+
+        // Fungsi untuk menampilkan daftar perusahaan
+        function displayCompanies() {
+            companyContainer.innerHTML = ''; // Hapus konten yang ada
+            allCompanies.forEach(company => {
+                const companyCard = document.createElement('div');
+                companyCard.className = 'company-card';
+                companyCard.innerHTML = `
+                    <h2>${company.name}</h2>
+                    <p><strong>Bidang:</strong> ${company.industry}</p>
+                    <p>${company.description}</p>
+                    <p><strong>Lowongan Terbuka:</strong> ${company.jobs}</p>
+                `;
+                companyContainer.appendChild(companyCard);
+            });
+        }
+
+        // Tampilkan semua perusahaan saat halaman pertama kali dimuat
+        displayCompanies();
+    </script>
+</body>
+</html>
